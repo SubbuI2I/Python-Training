@@ -1,5 +1,5 @@
 """
-URL configuration for banking_api project.
+URL configuration for assements project.
 
 The `urlpatterns` list routes URLs to views. For more information please see:
     https://docs.djangoproject.com/en/4.2/topics/http/urls/
@@ -19,8 +19,5 @@ from django.urls import path, include
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('plaid-api/', include('plaid_api.urls')),
-    path('paypal-api/', include('paypal_api.urls')),
-    path('', include('weather_api.urls')),
-    path('paypal/', include('paypal.standard.ipn.urls')),
+    path('', include('api_integration.urls'))
 ]
