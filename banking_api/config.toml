@@ -1,0 +1,2 @@
+PAYPAL_RECEIVER_EMAIL = 'subramanian.palaniappan@ideas2it.com'
+PAYPAL_TEST = True
