@@ -3,13 +3,13 @@ from config import Configurations
 import logging
 
 # Create your views here.
+
+
 def index(request):
-    breakpoint()
     config_details =  Configurations.logging_display(request)
     server_name = Configurations.server_name
     server_ip = Configurations.server_ip # Read from class properties
-    size = config_details['size'] # Read from class method 
-    print( size)
+    size = config_details['size']  # Read from class method
     # logging.log(1, f" {config_details} '-' {server_ip} '->' {server_name} {size}")
     
     formatter = logging.Formatter('%(asctime)s | %(levelname)s | %(message)s')
