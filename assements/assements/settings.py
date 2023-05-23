@@ -130,20 +130,34 @@ LOGGING = {
     "handlers": {
         "file": {
             "level": "INFO",
-            "class": "logging.FileHandler",
-            "filename": BASE_DIR / "debug.log",
+            "class": "logging.handlers.RotatingFileHandler",  # logging.FileHandler",
+            "filename": "./logger/log_files/logs.log",  # BASE_DIR / "debug.log",
+            "formatter": "simple",
+            'maxBytes': 10,  # 10485760 10MB (adjust as per your requirement)
+            # Number of log files to keep (adjust as per your requirement)
+            'backupCount': 2,
         },
-         "file": {
+        "file": {
             "level": "ERROR",
             "class": "logging.FileHandler",
-            "filename": BASE_DIR / "debug.log",
+            "filename": "./logger/log_files/logs.log"   # BASE_DIR / "debug.log",
         },
+        "file": {
+            "level": "DEBUG",
+            "class": "logging.FileHandler",
+            "filename": "./logger/log_files/logs.log"   # BASE_DIR / "debug.log",
+        }
+    },
+    "formatters": {
+        "simple": {
+            "format": '%(asctime)s %(levelname)s - [%(name)s:%(lineno)s] %(message)s',
+        }
     },
     "loggers": {
         "django": {
             "handlers": ["file"],
             "level": "INFO",
             "propagate": True,
-        },
-    },
+        }
+    }
 }

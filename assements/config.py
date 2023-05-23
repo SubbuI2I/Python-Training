@@ -1,5 +1,5 @@
 import toml
-import logging
+from logger.log import Log
 
 class Configurations:
     server_ip = ''
@@ -11,10 +11,12 @@ class Configurations:
         server_name = config['server_name'] 
         server_ip = config['server_ip'] 
         size = config['size'] 
-        logging.log(1,server_ip, server_name)
+        log = Log()
+        log.write_log(f'{server_ip} - {server_name}', 20)
 
     def logging_display(self):
         config = toml.load('config.toml')
-        logging.log(2,config)
+        log = Log()
+        log.write_log(f'{config}', 20)
         return config
     
