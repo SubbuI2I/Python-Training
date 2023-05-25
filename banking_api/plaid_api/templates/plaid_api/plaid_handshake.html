@@ -1,0 +1,69 @@
+<!-- Your HTML template -->
+
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Plaid Handshake</title>
+    <script src="https://cdn.plaid.com/link/v2/stable/link-initialize.js"></script>
+    <script>
+
+        request = LinkTokenCreateRequest(
+            products = [Products('auth'), Products('transactions')],
+            client_name = "Plaid Test App",
+            country_codes = [CountryCode('US')],
+            redirect_uri = 'https://domainname.com/oauth-page.html',
+            language = 'en',
+            webhook = 'https://sample-webhook-uri.com',
+            link_customization_name = 'default',
+            account_filters = LinkTokenAccountFilters(
+                depository = DepositoryFilter(
+                    account_subtypes = DepositoryAccountSubtypes(
+                        [DepositoryAccountSubtype('checking'), DepositoryAccountSubtype('savings')]
+                    )
+                )
+            ),
+            user = LinkTokenCreateRequestUser(
+                client_user_id = '123-test-user-id'
+            ),
+        )
+        # create link token
+        response = client.link_token_create(request)
+        link_token = response['link_token']
+
+        // Initialize Plaid Link
+        var linkHandler = Plaid.create({
+            env: 'sandbox',
+            clientName: 'Your App Name',
+            key: '{your_public_key}',
+            product: ['auth', 'transactions'],
+            onSuccess: function (public_token) {
+                // Send public token to backend for exchange
+                var csrf_token = document.getElementsByName('csrfmiddlewaretoken')[0].value;
+                var xhr = new XMLHttpRequest();
+                xhr.open('POST', '/plaid/handshake/', true);
+                xhr.setRequestHeader('X-CSRFToken', csrf_token);
+                xhr.onreadystatechange = function () {
+                    if (xhr.readyState == 4 && xhr.status == 200) {
+                        var access_token = xhr.responseText;
+                        // Process the access token as needed
+                    }
+                };
+                xhr.send('public_token=' + encodeURIComponent(public_token));
+            }
+        });
+
+        // Trigger Plaid Link on button click
+        function openPlaid() {
+            linkHandler.open();
+        }
+    </script>
+</head>
+
+<body>
+    <h1>Plaid Handshake</h1>
+
+    <button onclick="openPlaid()">Connect with Plaid</button>
+</body>
+
+</html>

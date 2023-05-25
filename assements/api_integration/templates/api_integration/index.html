@@ -1,0 +1,31 @@
+{%extends 'api_integration/layouts/layout.html' %}
+
+{%block title%}
+<title> Config and Mail </title>
+{%endblock title%}
+
+{%block content%}
+<table class="table caption-top table-bordered table-sm" style="max-width: 400px;">
+    <caption>Configuration Values</caption>
+    <thead>
+      <tr>
+        <th scope="col">Config Name</th>
+        <th scope="col">Value</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td> Server Name </td>
+        <td> {{ config.server_name }}</td>
+      </tr>
+      <tr>
+        <td> Server IP </td>
+        <td> {{ config.server_ip }}</td>
+      </tr>
+      <tr>
+        <td> Mail Status </td>
+        <td> {{ msg }}</td>
+      </tr>
+    </tbody>
+  </table>
+{%endblock content%}

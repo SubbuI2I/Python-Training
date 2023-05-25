@@ -1,0 +1,16 @@
+{% if title %}
+<div> <h1> {{title}} </h1> </div>
+{%endif%}
+<h3> Find By Text : {{search_text}} </h3>
+{% for item in find_by_text%}
+<li> {{item | truncatechars:50}} </li>
+{% endfor %}
+<br/>
+{% if map_img_url %}
+Image:  
+<div> <img src="{{map_img_url}}" alt=""> </div>
+{%endif%}
+<h4> Content </h4>
+<div>
+{{content | truncatechars:5000 }}
+</div>
