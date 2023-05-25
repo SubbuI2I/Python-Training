@@ -118,12 +118,14 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/4.2/howto/static-files/
 
 STATIC_URL = 'static/'
+STATIC_ROOT = BASE_DIR / STATIC_URL
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
+# region Logging config
 LOGGING = {
     "version": 1,
     "disable_existing_loggers": False,
@@ -161,3 +163,14 @@ LOGGING = {
         }
     }
 }
+
+# endregion
+
+# region Email configurations
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_PORT = 587
+EMAIL_HOST_USER = 'subramanian.palaniappan@ideas2it.com'
+EMAIL_HOST_PASSWORD = '***'  # use gmail app password
+EMAIL_USE_TLS = True
+# endregion
